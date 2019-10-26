@@ -18,6 +18,10 @@ class BaseRepository
     save_csv
   end
 
+  def find(id)
+    @elements.find { |element| element.id == id }
+  end
+
   private
 
   def load_csv
@@ -32,8 +36,10 @@ class BaseRepository
   def save_csv
     CSV.open(@csv_file_path, 'wb') do |csv|
       csv << @elements.first.class.headers
+      # Order.headers
       @elements.each do |element|
         csv << element.build_row
+        # order.build_row -> array
       end
     end
   end

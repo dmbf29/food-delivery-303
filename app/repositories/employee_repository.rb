@@ -8,6 +8,10 @@ class EmployeeRepository < BaseRepository
     @elements.find { |employee| employee.username == username }
   end
 
+  def delivery_guys
+    @elements.reject { |employee| employee.manager? }
+  end
+
   private
 
   def build_instance(row)
